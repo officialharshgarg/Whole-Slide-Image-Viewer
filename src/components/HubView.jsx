@@ -8,7 +8,12 @@ const HubView = ({
   if (!pointerPosition)
     return (
       <div
-        style={{ width: "20%", padding: "10px", borderLeft: "1px solid #ccc" }}
+        style={{
+          width: "20%",
+          padding: "10px",
+          borderLeft: "1px solid #ccc",
+          color: "black",
+        }}
       >
         <h3>WSI Zoomed-out View (Hub)</h3>
         <p>No selection</p>
