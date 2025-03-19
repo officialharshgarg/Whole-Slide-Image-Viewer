@@ -3,44 +3,50 @@ import React from "react";
 const HubView = ({
   pointerPosition,
   fullImageSize = { fullWidth: 1024, fullHeight: 768 },
-  zoomedViewSize = { zoomWidth: 500, zoomHeight: 400 },
+  zoomedViewSize = { zoomWidth: 200, zoomHeight: 100 }, // Default zoomed view size
 }) => {
-  if (!pointerPosition)
+  if (!pointerPosition) {
     return (
       <div
         style={{
           width: "20%",
           padding: "10px",
           borderLeft: "1px solid #ccc",
-          color: "black",
+          color: "#000",
         }}
       >
-        <h3>WSI Zoomed-out View (Hub)</h3>
-        <p>No selection</p>
+        <h3 style={{ color: "#000" }}>WSI Zoomed-out View (Hub)</h3>
+        <p style={{ color: "#000" }}>No selection</p>
       </div>
     );
+  }
 
   const [x, y, width, height] = pointerPosition;
-  const { fullWidth, fullHeight } = fullImageSize; // Full WSI image dimensions
-  const { zoomWidth, zoomHeight } = zoomedViewSize; // Zoomed-in view dimensions
+  const { fullWidth, fullHeight } = fullImageSize;
+  const { zoomWidth, zoomHeight } = zoomedViewSize;
 
-  // Calculate scale factor for HubView
-  const scaleX = 200 / fullWidth; // Assuming the HubView image is 200px wide
-  const scaleY = 100 / fullHeight; // Assuming the HubView image is 100px high
+  // Calculate scale factor dynamically based on zoomed view size
+  const scaleX = zoomWidth / fullWidth;
+  const scaleY = zoomHeight / fullHeight;
 
   return (
     <div
-      style={{ width: "20%", padding: "10px", borderLeft: "1px solid #ccc" }}
+      style={{
+        width: "20%",
+        padding: "10px",
+        borderLeft: "1px solid #ccc",
+        color: "#000",
+      }}
     >
-      <h3>WSI Zoomed-out View (Hub)</h3>
-      <p>Patient ID: 7</p>
-      <p>Blood</p>
+      <h3 style={{ color: "#000" }}>WSI Zoomed-out View (Hub)</h3>
+      <p style={{ color: "#000" }}>Patient ID: 7</p>
+      <p style={{ color: "#000" }}>Blood</p>
 
       <div
         style={{
           position: "relative",
-          width: "200px", // Fixed width for the HubView image
-          height: "100px", // Fixed height for the HubView image
+          width: `${zoomWidth}px`, // Dynamic zoomed view width
+          height: `${zoomHeight}px`, // Dynamic zoomed view height
           backgroundImage: "url('/wsi.jpg')",
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
